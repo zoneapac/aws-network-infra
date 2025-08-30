@@ -39,6 +39,9 @@ jobs:
           role-to-assume: arn:aws:iam::847025106884:role/githuboidc
           aws-region: us-east-1
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
       - name: Terraform Init
         run: terraform init
 
@@ -75,6 +78,9 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::847025106884:role/githuboidc
           aws-region: ap-southeast-2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
 
       - name: Terraform Init
         run: terraform init
