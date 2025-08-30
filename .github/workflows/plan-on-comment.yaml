@@ -39,10 +39,16 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
-        run: terraform plan -out=tfplan
+        run: terraform plan -out=tfplan > plan.txt
 
       - name: Upload plan artifact
         uses: actions/upload-artifact@v4
         with:
           name: tfplan
           path: tfplan
+
+      - name: Post plan output as PR comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body-file: plan.txt
