@@ -44,4 +44,10 @@ jobs:
           name: tfplan
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
+        run: terraform apply -auto-approve tfplan | tee apply.txt
+
+      - name: Post apply output as PR comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body-file: apply.txt
